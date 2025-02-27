@@ -16,8 +16,7 @@ library(effsize)
 
 
 #Working directory should be the Psychopy experiment directory.
-
-proje_wd <- "/Users/kihossei/Google Drive/My Drive/My Digital Life/Professional/GitHub_Repos/mfe-d-dataset"
+proje_wd <- "/Users/kihossei/Library/CloudStorage/GoogleDrive-hosseinikianoosh@gmail.com/My Drive/My Digital Life/Professional/Github_Repos/mfe-d-dataset"
 setwd(proje_wd)
 
 processed_file_input <- paste(proje_wd, "derivatives", "psychopy", "stat_output", sep ="/", collapse = NULL) # input data directory
@@ -139,7 +138,7 @@ shapiro.test(main_df$post_correct_hitRate) #
 
 
 t.test(main_df$early_correct_hitRate, main_df$early_error_hitRate, paired = TRUE, na.action = na.omit) #
-t.test(main_df$late_correct_hitRate, main_df$late_error_hitRate, paired = TRUE, na.action = na.omit) #
+t.test(main_df$late_correct_hitRate, main_df$late_error_hitRate, paired = TRUE, na.action = na.omit) #sig
 
 
 cor.test(main_df$scaared_b_scrdSoc_s1_r1_e1, main_df$overall_hitRate, method = 'pearson', na.action = na.omit)

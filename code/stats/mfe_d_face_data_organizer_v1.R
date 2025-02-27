@@ -8,7 +8,7 @@ library(dplyr)
 library(stringr)
 
 #Working directory should be the Psychopy experiment directory.
-proje_wd <- "/Users/kihossei/Google Drive/My Drive/My Digital Life/Professional/GitHub_Repos/mfe-d-dataset"
+proje_wd <- "/Users/kihossei/Library/CloudStorage/GoogleDrive-hosseinikianoosh@gmail.com/My Drive/My Digital Life/Professional/Github_Repos/mfe-d-dataset"
 setwd(proje_wd)
 
 # Defining the input and output folders.
@@ -35,7 +35,7 @@ for (i in 1:length(csvSelect)){
 for(subject in 1:length(datafiles_list)){
   # creating an empty data frame that will store all the information drawn from the flanker task of a participant.
   # This data frame will be saved as a csv file for this participant.
-  flanker_df <- setNames(data.frame(matrix(ncol = 28, nrow = 0)), c("participant_id", "current_trial_face", "pre_trial_face", "post_trial_face",
+  flanker_df <- setNames(data.frame(matrix(ncol = 31, nrow = 0)), c("participant_id", "current_trial_face", "pre_trial_face", "post_trial_face",
                                                                     "current_trial_accuracy", "pre_trial_accuracy", "post_trial_accuracy",
                                                                     "current_trial_congruency", "pre_trial_congruency", "post_trial_congruency",
                                                                     "current_trial_rt", "pre_trial_rt", "post_trial_rt",
@@ -43,7 +43,8 @@ for(subject in 1:length(datafiles_list)){
                                                                     "current_trial_legitResponse", "pre_trial_legitResponse", "post_trial_legitResponse",
                                                                     "current_trial_resp_nums", "pre_trial_resp_nums", "post_trial_resp_nums",
                                                                     "current_trial_resp_less_than_a_sec", "pre_trial_resp_less_than_a_sec", "post_trial_resp_less_than_a_sec",
-                                                                    "current_trial_face_delay_time", "pre_trial_face_delay_time", "post_trial_face_delay_time"))
+                                                                    "current_trial_face_delay_time", "pre_trial_face_delay_time", "post_trial_face_delay_time",
+                                                                    "current_trial_faceDuration", "pre_trial_faceDuration", "post_trial_faceDuration"))
   # creating an empty data frame that will store all the information drawn from the surprise task of a participant.
   # This data frame will be saved as a csv file for this participant.
   surprise_df <- setNames(data.frame(matrix(ncol = 5, nrow = 0)), c("participant_id", "face", "surpAcc", "memory_surp_responses", "memory_surp_rt"))
@@ -134,6 +135,7 @@ for(subject in 1:length(datafiles_list)){
     current_trial_resp_nums <- flankerDat$number_of_responses[trial] # number of responses for the current trial
     current_trial_resp_less_than_a_sec <- flankerDat$responded_less_than_a_sec[trial]
     current_trial_face_delay_time <- flankerDat$face_delay_time[trial]
+    current_trial_faceDuration <- flankerDat$faceDisp_plus_faceDelay_time[trial] - current_trial_face_delay_time
 
     if (flankerDat$task_trial_loop.thisTrialN[trial] == 0){ # if the trial is the first in its block
       pre_trial_face <- NA
@@ -142,6 +144,7 @@ for(subject in 1:length(datafiles_list)){
       pre_trial_resp_nums <- NA
       pre_trial_resp_less_than_a_sec <- NA
       pre_trial_face_delay_time <- NA
+      pre_trial_faceDuration <- NA
     } else {
       pre_trial_face <- flankerDat$straightFace[trial - 1]
       pre_trial_congruency <- flankerDat$congruent[trial - 1]
@@ -149,6 +152,7 @@ for(subject in 1:length(datafiles_list)){
       pre_trial_resp_nums <- flankerDat$number_of_responses[trial - 1]
       pre_trial_resp_less_than_a_sec <- flankerDat$responded_less_than_a_sec[trial - 1]
       pre_trial_face_delay_time <- flankerDat$face_delay_time[trial - 1]
+      pre_trial_faceDuration <- flankerDat$faceDisp_plus_faceDelay_time[trial - 1] - pre_trial_face_delay_time
     }
     if (flankerDat$task_trial_loop.thisTrialN[trial] == 31){ # if the trial is the last in its block
       post_trial_face <- NA
@@ -157,6 +161,7 @@ for(subject in 1:length(datafiles_list)){
       post_trial_resp_nums <- NA
       post_trial_resp_less_than_a_sec <- NA
       post_trial_face_delay_time <- NA
+      post_trial_faceDuration <- NA
     } else {
       post_trial_face <- flankerDat$straightFace[trial + 1]
       post_trial_congruency <- flankerDat$congruent[trial + 1]
@@ -164,6 +169,7 @@ for(subject in 1:length(datafiles_list)){
       post_trial_resp_nums <- flankerDat$number_of_responses[trial + 1]
       post_trial_resp_less_than_a_sec <- flankerDat$responded_less_than_a_sec[trial + 1]
       post_trial_face_delay_time <- flankerDat$face_delay_time[trial + 1]
+      post_trial_faceDuration <- flankerDat$faceDisp_plus_faceDelay_time[trial + 1] - post_trial_face_delay_time
     }
 
     if (flankerDat$number_of_responses[trial] == 0){ # When no response made in a flanker task trial
@@ -234,7 +240,8 @@ for(subject in 1:length(datafiles_list)){
                                           current_trial_legitResponse, pre_trial_legitResponse, post_trial_legitResponse,
                                           current_trial_resp_nums, pre_trial_resp_nums, post_trial_resp_nums,
                                           current_trial_resp_less_than_a_sec, pre_trial_resp_less_than_a_sec, post_trial_resp_less_than_a_sec,
-                                          current_trial_face_delay_time, pre_trial_face_delay_time, post_trial_face_delay_time)
+                                          current_trial_face_delay_time, pre_trial_face_delay_time, post_trial_face_delay_time,
+                                          current_trial_faceDuration, pre_trial_faceDuration, post_trial_faceDuration)
   } # Closing the loop for each trial
 
   flanker_name <- paste0(participant_id, flanker_csv_fileName, sep = "", collapse = NULL)

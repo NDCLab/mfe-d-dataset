@@ -12,7 +12,7 @@ library(stringr)
 library(psycho) # to compute d' measures, etc.
 
 #Working directory should be the Psychopy experiment directory.
-proje_wd <- "/Users/kihossei/Google Drive/My Drive/My Digital Life/Professional/GitHub_Repos/mfe-d-dataset"
+proje_wd <- "/Users/kihossei/Library/CloudStorage/GoogleDrive-hosseinikianoosh@gmail.com/My Drive/My Digital Life/Professional/Github_Repos/mfe-d-dataset"
 setwd(proje_wd)
 
 

@@ -16,8 +16,7 @@ library(effsize)
 
 
 #Working directory should be the Psychopy experiment directory.
-
-proje_wd <- "/Users/kihossei/Google Drive/My Drive/My Digital Life/Professional/GitHub_Repos/mfe-d-dataset"
+proje_wd <- "/Users/kihossei/Library/CloudStorage/GoogleDrive-hosseinikianoosh@gmail.com/My Drive/My Digital Life/Professional/Github_Repos/mfe-d-dataset"
 setwd(proje_wd)
 
 processed_file_input <- paste(proje_wd, "derivatives", "psychopy", "stat_output", sep ="/", collapse = NULL) # input data directory
@@ -116,7 +115,7 @@ sd(main_df$overall_hitRate, na.rm = TRUE)
 
 mean(main_df$early_error_hitRate, na.rm = TRUE)
 sd(main_df$early_error_hitRate, na.rm = TRUE)
-shapiro.test(main_df$error_hitRate) #
+
 
 mean(main_df$late_error_hitRate, na.rm = TRUE)
 sd(main_df$late_error_hitRate, na.rm = TRUE)
